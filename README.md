@@ -15,3 +15,6 @@ Use https://github.com/HackerNews/API to generate a page using C# and .NET that 
 
 <p>Used In-Memory cache. 
 https://docs.microsoft.com/en-us/aspnet/core/performance/caching/memory#caching-basics</p>
+
+<p><b>TODO</b></p>
+<p>Investigate better error handling for BestStoryController.GetStoryAsnc. Currently, if there is an issue retrieving story details, creates a story object with an error message in title then saves to cache. Trouble spot would be on subsequent calls. Even if connection was restored, story id is still in cache and would return object with error in title. Possible solution; on error, do not store error story in cache.</p>
