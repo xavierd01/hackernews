@@ -1,0 +1,43 @@
+@model IEnumerable<HackerStorySummary>
+
+@{
+    ViewData["Title"] = "Hacker News Best Stories";
+}
+
+<h2>Hacker News Stories</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">
+                <h3>Best Stories</h3>
+                <form asp-controller="BestStory" asp-action="Index">
+                    <p>
+                        <input type="search" name="SearchString" value='@ViewData["Filter"]' 
+                            placeholder="Title or Author" />
+                        <input type="submit" value="Search" />
+                    </p>
+                </form>
+                @if (@ViewData["FailedConnection"] != null)
+                {
+                    <p>Error connecting to Hacker News...</p>
+                }
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @if (!Model.Any())
+        {
+            <tr>No matches found...</tr>
+        }
+        else
+        {
+            @foreach (var story in Model) {
+                <tr>
+                    <td><b>@story.Title</b> by @story.By</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
